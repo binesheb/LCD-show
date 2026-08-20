@@ -1,204 +1,91 @@
-### Install drivers in the Ubuntu system
-https://github.com/lcdwiki/LCD-show-ubuntu
+# LCD-show
 
-### Install drivers in the Kali system
-https://github.com/lcdwiki/LCD-show-kali
+Legacy Raspberry Pi display-driver collection for a range of LCDWiki/GoodTFT panels.
 
-### Install drivers in the RetroPie system
-https://github.com/lcdwiki/LCD-show-retropie
+> **Maintenance status:** preserved for existing installations. The bundled scripts were last updated in April 2021 and may modify boot configuration, X11/input settings, kernel modules, or trigger a reboot. Review the selected script before running it, especially on current Raspberry Pi OS releases.
 
+## What is in this repository
 
+The repository contains model-specific installer scripts such as `LCD24-show`, `LCD35-show`, `LCD5-show`, `LCD7B-show`, DPI panel installers, and rotation helpers. It is not a single generic driver: choose the script that matches the exact display model.
 
-Install drivers in the Raspbian system<br>
-====================================================
-Update: <br>
-  v2.1-20191106<br>
-  Update to support MHS35B<br>
-Update: <br>
-  v2.0-20190704<br>
-  Update to support rotate the display direction<br>
-Update: <br>
-  v1.9-20181204<br>
-  Update to support MHS40 & MHS32<br>
-Update: <br>
-  v1.8-20180907<br>
-  Update to support MHS35<br>
-Update: <br>
-  v1.7-20180320<br>
-  Update to support Raspbian Version: March 2018(Release date:2018-03-13)<br>
-Update: <br>
-  v1.6-20170824<br>
-  Update xserver to support Raspbian-2017-08-16<br>
-Update: <br>
-  v1.5-20170706<br>
-  Update to support Raspbian-2017-07-05, Raspbian-2017-06-21<br>
-Update: <br>
-  v1.3-20170612<br>
-  fixed to support Raspbian-2017-03-02, Raspbian-2017-04-10<br>
-Update: <br>
-  v1.2-20170302<br>
-  Add xserver-xorg-input-evdev_1%3a2.10.3-1_armhf.deb to support Raspbian-2017-03-02<br>
-Update: <br>
-  v1.1-20160815<br><br>
+## Before installing
 
+1. Back up the Raspberry Pi or at least `/boot`/`/boot/firmware` and important configuration files.
+2. Confirm the exact display model and Raspberry Pi OS version.
+3. Inspect the installer before running it with elevated privileges.
+4. Expect some installers to reboot the device.
 
-# How to install the LCD driver of Raspberry Pi
-  
-1.)Step1, Install Raspbian official mirror <br>
-====================================================
-  a)Download Raspbian official mirror:<br>
-  https://www.raspberrypi.org/downloads/<br>
-  b)Use“SDFormatter.exe”to Format your TF Card<br>
-  c)Use“Win32DiskImager.exe” Burning mirror to TF Card<br>
-     
-2.) Step2, Clone my repo onto your pi<br>
-====================================================
-Use SSH to connect the Raspberry Pi, <br>
-And Ensure that the Raspberry Pi is connected to the Internet before executing the following commands:
------------------------------------------------------------------------------------------------------
+## Install from this repository
 
-```sudo rm -rf LCD-show```<br>
-```git clone https://github.com/goodtft/LCD-show.git```<br>
-```chmod -R 755 LCD-show```<br>
-```cd LCD-show/```<br>
-  
-3.)Step3, According to your LCD's type, excute the corresponding driver:
-====================================================
-
-# 2.4” RPi Display (MPI2401):
-### Driver install:
+```bash
+git clone https://github.com/binesheb/LCD-show.git
+cd LCD-show
+git status --short
+chmod +x LCD24-show   # replace with the required installer
 sudo ./LCD24-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/2.4inch_RPi_Display  <br>
-EN: http://www.lcdwiki.com/2.4inch_RPi_Display
- 
+```
 
-# 2.4” RPi Display For RPi 3A+ (MPI2411):
-### Driver install:
-sudo ./LCD24-3A+-show  
-### WIKI:
-CN: http://www.lcdwiki.com/zh/2.4inch_RPi_Display_For_RPi_3A+   <br>
-EN: http://www.lcdwiki.com/2.4inch_RPi_Display_For_RPi_3A+
+Replace `LCD24-show` with the script for the connected panel. Some historical panel names and commands remain documented in the scripts themselves.
 
-# 2.8” RPi Display (MPI2801):
-### Driver install:
-sudo ./LCD28-show 
-### WIKI:
-CN: http://www.lcdwiki.com/zh/2.8inch_RPi_Display  <br>
-EN: http://www.lcdwiki.com/2.8inch_RPi_Display
-  
-# 3.2” RPi Display (MPI3201):
-### Driver install:
-sudo ./LCD32-show   
-### WIKI:
-CN: http://www.lcdwiki.com/zh/3.2inch_RPi_Display  <br>
-EN: http://www.lcdwiki.com/3.2inch_RPi_Display
+## Rotation
 
-# MHS-3.2” RPi Display (MHS3232):
-### Driver install:
-sudo ./MHS32-show   
-### WIKI:
-CN: http://www.lcdwiki.com/zh/MHS-3.2inch_Display  <br>
-EN: http://www.lcdwiki.com/MHS-3.2inch_Display
+Where supported, installers historically accept a rotation argument:
 
-# 3.5” RPi Display(MPI3501):
-### Driver install:
-sudo ./LCD35-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/3.5inch_RPi_Display  <br>
-EN: http://www.lcdwiki.com/3.5inch_RPi_Display
-   
-# 3.5” HDMI Display-B(MPI3508):
-### Driver install:
-sudo ./MPI3508-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/3.5inch_HDMI_Display-B  <br>
-EN: http://www.lcdwiki.com/3.5inch_HDMI_Display-B
-    
-# MHS-3.5” RPi Display(MHS3528):
-### Driver install:
-sudo ./MHS35-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/MHS-3.5inch_RPi_Display  <br>
-EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display
+```bash
+sudo ./LCD24-show 90
+```
 
-# MHS-3.5” RPi Display-B(MHS35XX):
-### Driver install:
-sudo ./MHS35B-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/MHS-3.5inch_RPi_Display-B  <br>
-EN:http://www.lcdwiki.com/MHS-3.5inch_RPi_Display-B
+Valid values are typically `0`, `90`, `180`, and `270`. If the display is already configured, use the repository's `rotate.sh` helper when present and supported by the selected driver.
 
-# 4.0" HDMI Display(MPI4008):
-### Driver install:
-sudo ./MPI4008-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/4inch_HDMI_Display-C  <br>
-EN: http://www.lcdwiki.com/4inch_HDMI_Display-C
-   
-# MHS-4.0" HDMI Display-B(MHS4001):
-### Driver install:
-sudo ./MHS40-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/MHS-4.0inch_Display-B  <br>
-EN: http://www.lcdwiki.com/MHS-4.0inch_Display-B
-  
-# 5.0” HDMI Display(Resistance touch)(MPI5008):
-### Driver install:
-sudo ./LCD5-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/5inch_HDMI_Display  <br>
-EN: http://www.lcdwiki.com/5inch_HDMI_Display
-    
-# 5inch HDMI Display-B(Capacitor touch)(MPI5001):
-### Driver install:
-sudo ./MPI5001-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/5inch_HDMI_Display-B  <br>
-EN: http://www.lcdwiki.com/5inch_HDMI_Display-B
-    
-# 7inch HDMI Display-B-800X480(MPI7001):
-### Driver install:
-sudo ./LCD7B-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/7inch_HDMI_Display-B  <br>
-EN: http://www.lcdwiki.com/7inch_HDMI_Display-B
-   
-# 7inch HDMI Display-C-1024X600(MPI7002):
-### Driver install:
-sudo ./LCD7C-show
-### WIKI:
-CN: http://www.lcdwiki.com/zh/7inch_HDMI_Display-C  <br>
-EN: http://www.lcdwiki.com/7inch_HDMI_Display-C
-   
-Wait for a moment after executing the above command, then you can use the corresponding raspberry LCD.
+## Updates
 
+### Safe automatic update policy
 
+Do **not** enable unattended updates for these display drivers. A driver update can change low-level boot and display configuration, so automatic upgrades should be performed only after a tested, versioned release and a device-specific rollback path exist.
 
+### Manual update
 
-# How to rotate the display direction
+From an existing clone:
 
-This method only applies to the Raspberry Pi series of display screens, other display screens do not apply.
+```bash
+cd /path/to/LCD-show
+git fetch --tags --prune
+git status --short
+git pull --ff-only
+```
 
-### Method 1, If the driver is not installed, execute the following command (Raspberry Pi needs to connected to the Internet):
+For reproducibility, pin a known revision instead of following the moving branch:
 
-sudo rm -rf LCD-show<br>
-git clone https://github.com/goodtft/LCD-show.git<br>
-chmod -R 755 LCD-show<br>
-cd LCD-show/<br>
-sudo ./XXX-show 90<br>
+```bash
+git fetch --tags
+git checkout <tag-or-commit>
+```
 
-After execution, the driver will be installed. The system will automatically restart, and the display screen will rotate 90 degrees to display and touch normally.<br>
-( ' XXX-show ' can be changed to the corresponding driver, and ' 90 ' can be changed to 0, 90, 180 and 270, respectively representing rotation angles of 0 degrees, 90 degrees, 180 degrees, 270 degrees)<br>
+To roll back:
 
-### Method 2, If the driver is already installed, execute the following command:
+```bash
+git checkout <previous-tag-or-commit>
+```
 
-cd LCD-show/<br>
-sudo ./rotate.sh 90<br>
+Re-run the relevant installer only after reviewing its changes and confirming compatibility with the operating system and panel.
 
-After execution, the system will automatically restart, and the display screen will rotate 90 degrees to display and touch normally.<br>
-( ' 90 ' can be changed to 0, 90, 180 and 270, respectively representing rotation angles of 0 degrees, 90 degrees, 180 degrees, 270 degrees)<br>
-(If the rotate.sh prompt cannot be found, use Method 1 to install the latest drivers)
+## Versioning and releases
 
+Maintenance changes follow Semantic Versioning. Patch releases are for documentation, packaging, and compatible fixes; minor releases add compatible capabilities; major releases indicate incompatible installation or support changes. Historical upstream-style version notes are retained in repository history, while current maintenance entries are recorded in `CHANGELOG.md`.
 
+## Support scope
 
+This fork does not claim compatibility with every current Raspberry Pi OS/kernel combination. When reporting a problem, include:
+
+- Raspberry Pi model
+- exact display/panel model
+- operating system and kernel version
+- installer script used
+- relevant console output
+
+## Next modernization priorities
+
+- Audit each installer against current Raspberry Pi OS layouts and kernel interfaces.
+- Add compatibility checks and explicit backups before configuration changes.
+- Replace broad permission changes and destructive setup where possible.
+- Establish tested, tagged releases before any automated updater is introduced.
