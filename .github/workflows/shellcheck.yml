@@ -1,0 +1,31 @@
+name: Validate installer scripts
+
+on:
+  push:
+    paths:
+      - '**/*.sh'
+      - '**/*-show'
+      - 'rotate.sh'
+      - '.github/workflows/shellcheck.yml'
+  pull_request:
+    paths:
+      - '**/*.sh'
+      - '**/*-show'
+      - 'rotate.sh'
+      - '.github/workflows/shellcheck.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  shell-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check shell syntax
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' script; do
+            echo "Checking $script"
+            bash -n "$script"
+          done < <(find . -type f \( -name '*.sh' -o -name '*-show' \) -print0)
