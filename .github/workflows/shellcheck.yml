@@ -22,10 +22,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
-      - name: Check shell syntax
+      - name: Check shell syntax and executable bits
         run: |
           set -euo pipefail
           while IFS= read -r -d '' script; do
             echo "Checking $script"
             bash -n "$script"
+            if [[ ! -x "$script" ]]; then
+              echo "ERROR: installer script is not executable: $script" >&2
+              exit 1
+            fi
           done < <(find . -type f \( -name '*.sh' -o -name '*-show' \) -print0)
