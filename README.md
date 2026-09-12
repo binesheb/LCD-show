@@ -27,6 +27,10 @@ sudo ./LCD24-show
 
 Replace `LCD24-show` with the script for the connected panel. Some historical panel names and commands remain documented in the scripts themselves.
 
+## Validation
+
+Changes to installer scripts are automatically checked in GitHub Actions for shell syntax and required executable bits. This validation does **not** prove compatibility with a particular Raspberry Pi model, kernel, Raspberry Pi OS release, or LCD panel; installation must still be tested on the target hardware before deployment.
+
 ## Rotation
 
 Where supported, installers historically accept a rotation argument:
