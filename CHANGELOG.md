@@ -4,6 +4,13 @@ All notable maintenance changes to this repository are documented here.
 
 The project uses [Semantic Versioning](https://semver.org/). Historical display-driver updates predate this maintenance policy.
 
+## [Unreleased]
+
+### Changed
+- Scoped installer validation to model-specific installer scripts rather than unrelated shell helpers.
+- Added a bounded validation runtime so malformed installer trees cannot consume CI indefinitely.
+- Documented that automated installer validation checks shell syntax and executable bits only; hardware, kernel, and panel compatibility still require target-device testing.
+
 ## [0.1.1] - 2026-08-20
 
 ### Changed
