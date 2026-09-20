@@ -38,3 +38,11 @@ jobs:
               exit 1
             fi
           done < <(find . -maxdepth 1 -type f \( -name '*.sh' -o -name '*-show' \) -print0)
+
+          while IFS= read -r -d '' script; do
+            echo "Checking interpreter declaration: $script"
+            if ! head -n 1 "$script" | grep -q '^#!'; then
+              echo "ERROR: installer/helper has no shebang: $script" >&2
+              exit 1
+            fi
+          done < <(find . -maxdepth 1 -type f \( -name '*.sh' -o -name '*-show' \) -print0)
